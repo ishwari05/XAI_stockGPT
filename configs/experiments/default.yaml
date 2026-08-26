@@ -1,0 +1,32 @@
+experiment:
+  name: "baseline_benchmark"
+  description: "Standard end-to-end benchmark across prediction models, SHAP explainers, and fine-tuned LLMs"
+  version: "1.0.0"
+  random_seed: 42
+
+pipeline:
+  prediction_models:
+    - "xgboost"
+    - "lightgbm"
+    - "random_forest"
+  
+  llm_models:
+    - "qwen"
+    - "fingpt"
+
+  xai:
+    sample_size: 5000
+    top_k_features: 5
+    faithfulness_perturbation_tests: true
+
+  llm_dataset:
+    train_samples: 30000
+    val_samples: 10000
+    test_samples: 10000
+    tasks:
+      - "SIGNAL_EXPLANATION"
+      - "FEATURE_CONTRIBUTION"
+      - "CONFIDENCE_EXPLANATION"
+      - "CONFLICTING_INDICATORS"
+      - "ERROR_EXPLANATION"
+      - "COMPLETE_ANALYST"

@@ -1,0 +1,43 @@
+model:
+  name: "qwen"
+  model_id: "Qwen/Qwen2.5-7B-Instruct"
+  fallback_model_id: "Qwen/Qwen2.5-1.5B-Instruct"
+  family: "general_instruction"
+
+peft:
+  method: "lora"
+  r: 16
+  lora_alpha: 32
+  lora_dropout: 0.05
+  bias: "none"
+  task_type: "CAUSAL_LM"
+  target_modules:
+    - "q_proj"
+    - "k_proj"
+    - "v_proj"
+    - "o_proj"
+    - "gate_proj"
+    - "up_proj"
+    - "down_proj"
+
+training:
+  learning_rate: 0.0002
+  num_train_epochs: 3
+  per_device_train_batch_size: 4
+  per_device_eval_batch_size: 4
+  gradient_accumulation_steps: 4
+  max_seq_length: 1024
+  warmup_ratio: 0.03
+  weight_decay: 0.01
+  logging_steps: 50
+  eval_steps: 250
+  save_steps: 250
+  fp16: "auto" # true if cuda available and supported, false otherwise
+  bf16: "auto" # true if supported on cuda accelerator
+  device: "auto" # automatically resolved via hardware detector
+
+evaluation:
+  batch_size: 8
+  max_new_tokens: 350
+  temperature: 0.1
+  top_p: 0.95

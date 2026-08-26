@@ -1,0 +1,55 @@
+data_source:
+  provider: "yfinance"
+  retry_attempts: 3
+  backoff_factor: 2.0
+  request_delay_seconds: 0.5
+  batch_size: 10
+
+tickers:
+  source: "list" # Options: "list" (inline list below) or "file" (CSV/text file path)
+  symbols:
+    - "RELIANCE.NS"
+    - "TCS.NS"
+    - "INFY.NS"
+    - "HDFCBANK.NS"
+    - "SBIN.NS"
+  path: "" # Used if source is "file"
+  symbol_column: "Symbol" # Column name if reading from file
+
+date_range:
+  start: "2015-01-01"
+  end: "2026-01-01"
+
+download:
+  interval: "1d"
+  auto_adjust: false
+  progress: true
+
+cleaning:
+  remove_duplicates: true
+  fill_missing: false # Forward-fill missing prices if within threshold
+  max_consecutive_missing: 5
+  drop_invalid_rows: true
+
+validation:
+  min_rows: 100
+  missing_threshold: 0.05
+  check_ohlc_consistency: true
+  check_non_negative: true
+  check_duplicate_dates: true
+
+splitting:
+  enabled: true
+  train_end: "2023-12-31"
+  validation_end: "2024-12-31"
+  test_start: "2025-01-01"
+
+storage:
+  raw_path: "data/raw"
+  processed_path: "data/processed"
+  metadata_path: "data/metadata"
+  splits_path: "data/splits"
+  reports_path: "reports/data_validation"
+  logs_path: "logs"
+  save_individual_csv: true
+  save_combined_parquet: true

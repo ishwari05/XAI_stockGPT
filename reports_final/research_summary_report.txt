@@ -1,0 +1,7 @@
+============================================================
+      XAI-STOCKGPT v2: RESEARCH PAPER SUMMARY REPORT
+============================================================
+
+status: COMPLETED
+evaluated_models: []
+output_tables_directory: /Users/ishwaripandit05/Documents/xai_stockgpt/xai-stockgpt-v2/reports_tables

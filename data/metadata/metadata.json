@@ -1,0 +1,25 @@
+{
+  "tickers_requested": 5,
+  "tickers_collected": 5,
+  "tickers_validated_success": 5,
+  "failed_downloads_count": 0,
+  "failed_downloads": [],
+  "total_raw_rows": 2965,
+  "total_cleaned_rows": 2965,
+  "start_date": "2023-01-02",
+  "end_date": "2025-05-30",
+  "duplicates_removed": 0,
+  "missing_values_detected": 0,
+  "missing_values_filled": 0,
+  "invalid_rows_dropped": 0,
+  "split_info": {
+    "train": "/Users/ishwaripandit05/Documents/xai_stockgpt/xai-stockgpt-v2/data/splits/train.parquet",
+    "validation": "/Users/ishwaripandit05/Documents/xai_stockgpt/xai-stockgpt-v2/data/splits/validation.parquet",
+    "test": "/Users/ishwaripandit05/Documents/xai_stockgpt/xai-stockgpt-v2/data/splits/test.parquet",
+    "train_rows": 1825,
+    "val_rows": 630,
+    "test_rows": 510
+  },
+  "timestamp": "2026-08-25T22:45:40.975030",
+  "pipeline_duration_sec": 3.05
+}

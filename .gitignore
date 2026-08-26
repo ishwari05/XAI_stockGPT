@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual environment
+.venv/
+env/
+venv/
+
+# Data files (keep them out of version control)
+data/raw/
+data/processed/
+*.parquet
+*.csv
+*.npz
+*.h5
+
+# Model checkpoints / large binaries
+*.pt
+*.ckpt
+*.h5
+*.pth
+*.safetensors
+
+# Jupyter notebooks checkpoints
+.ipynb_checkpoints/
+
+# OS / editor artifacts
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

@@ -1,0 +1,21 @@
+model:
+  name: "lightgbm"
+  family: "tree_ensemble"
+  type: "classifier"
+  explainer_type: "tree_shap"
+
+hyperparameters:
+  n_estimators: 300
+  max_depth: 4
+  num_leaves: 31
+  learning_rate: 0.05
+  subsample: 0.8
+  colsample_bytree: 0.8
+  objective: "multiclass"
+  num_class: 3
+  random_state: 42
+  verbose: -1
+
+training:
+  early_stopping_rounds: 30
+  verbose: false

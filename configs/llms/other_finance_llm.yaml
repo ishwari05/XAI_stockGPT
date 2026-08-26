@@ -1,0 +1,40 @@
+model:
+  name: "other_finance_llm"
+  model_id: "AdaptLLM/finance-LLM-13B"
+  fallback_model_id: "mistralai/Mistral-7B-Instruct-v0.3"
+  family: "domain_adapted"
+
+peft:
+  method: "lora"
+  r: 16
+  lora_alpha: 32
+  lora_dropout: 0.05
+  bias: "none"
+  task_type: "CAUSAL_LM"
+  target_modules:
+    - "q_proj"
+    - "k_proj"
+    - "v_proj"
+    - "o_proj"
+
+training:
+  learning_rate: 0.00015
+  num_train_epochs: 3
+  per_device_train_batch_size: 2
+  per_device_eval_batch_size: 2
+  gradient_accumulation_steps: 8
+  max_seq_length: 1024
+  warmup_ratio: 0.03
+  weight_decay: 0.01
+  logging_steps: 50
+  eval_steps: 250
+  save_steps: 250
+  fp16: "auto"
+  bf16: "auto"
+  device: "auto"
+
+evaluation:
+  batch_size: 4
+  max_new_tokens: 350
+  temperature: 0.1
+  top_p: 0.95

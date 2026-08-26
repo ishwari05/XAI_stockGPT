@@ -1,0 +1,18 @@
+model:
+  name: "neural_baseline"
+  family: "neural_network"
+  type: "classifier"
+  explainer_type: "kernel_shap"
+
+hyperparameters:
+  hidden_dims: [128, 64, 32]
+  dropout: 0.2
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  batch_size: 64
+  epochs: 50
+  random_state: 42
+
+training:
+  early_stopping_patience: 10
+  device: "auto" # auto detects CUDA -> other accelerator -> CPU

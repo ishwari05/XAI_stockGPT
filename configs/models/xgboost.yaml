@@ -1,0 +1,21 @@
+model:
+  name: "xgboost"
+  family: "tree_ensemble"
+  type: "classifier"
+  explainer_type: "tree_shap"
+
+hyperparameters:
+  n_estimators: 300
+  max_depth: 4
+  learning_rate: 0.05
+  subsample: 0.8
+  colsample_bytree: 0.8
+  objective: "multi:softprob"
+  num_class: 3
+  eval_metric: "mlogloss"
+  random_state: 42
+  tree_method: "hist" # Automatically utilizes GPU acceleration if CUDA is available
+
+training:
+  early_stopping_rounds: 30
+  verbose: false

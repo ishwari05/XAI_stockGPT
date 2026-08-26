@@ -1,0 +1,76 @@
+features:
+  trend:
+    enabled: true
+    sma_periods: [20, 50]
+    ema_periods: [20, 50]
+    price_vs_sma_periods: [20, 50]
+    macd:
+      enabled: true
+      fast_period: 12
+      slow_period: 26
+      signal_period: 9
+
+  momentum:
+    enabled: true
+    rsi_period: 14
+    stochastic:
+      enabled: true
+      k_window: 14
+      d_window: 3
+
+  volatility:
+    enabled: true
+    atr_period: 14
+    bollinger:
+      enabled: true
+      period: 20
+      num_std: 2.0
+      include_bandwidth: true
+      include_pct_b: true
+    rolling_volatility_windows: [10, 20]
+
+  volume:
+    enabled: true
+    volume_sma_period: 20
+    volume_ratio: true
+    obv: true
+
+  returns:
+    enabled: true
+    horizons: [1, 5, 10, 20]
+    log_returns: false
+
+targets:
+  classification:
+    enabled: true
+    horizon: 1 # Number of forward trading days
+    method: "fixed_return"
+    buy_threshold: 0.01 # +1.0% forward return
+    sell_threshold: -0.01 # -1.0% forward return
+    class_labels:
+      0: "SELL"
+      1: "HOLD"
+      2: "BUY"
+
+  regression:
+    enabled: true
+    horizons: [1, 5, 10]
+
+warmup:
+  drop_warmup_rows: true
+  min_valid_features_ratio: 1.0 # Requires 100% valid features (drops NaN rows caused by indicators)
+
+validation:
+  check_nan: true
+  check_inf: true
+  check_ranges: true
+  check_duplicate_rows: true
+  check_chronological: true
+  check_leakage: true
+
+storage:
+  input_splits_path: "data/splits"
+  output_features_path: "data/features"
+  metadata_path: "data/features/feature_metadata.json"
+  reports_path: "reports/features"
+  logs_path: "logs"

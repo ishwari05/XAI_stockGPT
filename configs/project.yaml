@@ -1,0 +1,26 @@
+project:
+  name: "XAI-StockGPT"
+  version: "2.0.0"
+  description: "Configuration-driven Explainable AI Financial Signal & Natural Language Rationale System"
+  random_seed: 42
+
+paths:
+  data_raw: "data/raw"
+  data_interim: "data/interim"
+  data_processed: "data/processed"
+  data_features: "data/features"
+  data_predictions: "data/predictions"
+  data_explanations: "data/explanations"
+  data_llm: "data/llm"
+  models_prediction: "models/prediction"
+  models_llm: "models/llm"
+  reports_tables: "reports/tables"
+  reports_figures: "reports/figures"
+  reports_final: "reports/final"
+  experiments: "experiments"
+
+hardware:
+  device: "auto" # Options: auto, cuda, mps, cpu. Auto prioritizes CUDA -> other accelerator -> CPU.
+  allow_tf32: true
+  num_workers: 4
+  pin_memory: true
