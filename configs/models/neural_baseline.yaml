@@ -5,12 +5,11 @@ model:
   explainer_type: "kernel_shap"
 
 hyperparameters:
-  hidden_dims: [128, 64, 32]
-  dropout: 0.2
-  learning_rate: 0.001
-  weight_decay: 0.0001
-  batch_size: 64
-  epochs: 50
+  hidden_layer_sizes: [128, 64, 32]
+  learning_rate_init: 0.001
+  alpha: 0.0001
+  batch_size: 256
+  max_iter: 100
   random_state: 42
 
 training:

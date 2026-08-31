@@ -1,0 +1,86 @@
+[
+  {
+    "feature": "return_1d",
+    "importance": 0.09035731106996536
+  },
+  {
+    "feature": "bb_bandwidth",
+    "importance": 0.06000722944736481
+  },
+  {
+    "feature": "atr_14",
+    "importance": 0.05422724410891533
+  },
+  {
+    "feature": "price_vs_sma50",
+    "importance": 0.04257825016975403
+  },
+  {
+    "feature": "return_5d",
+    "importance": 0.03982790559530258
+  },
+  {
+    "feature": "bb_pct_b",
+    "importance": 0.03618408367037773
+  },
+  {
+    "feature": "volume_ratio",
+    "importance": 0.025855187326669693
+  },
+  {
+    "feature": "rsi_14",
+    "importance": 0.02405708283185959
+  },
+  {
+    "feature": "stoch_k",
+    "importance": 0.02133522927761078
+  },
+  {
+    "feature": "obv",
+    "importance": 0.017471453174948692
+  },
+  {
+    "feature": "volume_sma_20",
+    "importance": 0.012938106432557106
+  },
+  {
+    "feature": "stoch_d",
+    "importance": 0.012359061278402805
+  },
+  {
+    "feature": "macd_signal",
+    "importance": 0.010230714455246925
+  },
+  {
+    "feature": "bb_lower",
+    "importance": 0.008972243405878544
+  },
+  {
+    "feature": "macd",
+    "importance": 0.008440906181931496
+  },
+  {
+    "feature": "bb_upper",
+    "importance": 0.007757686078548431
+  },
+  {
+    "feature": "macd_hist",
+    "importance": 0.007265723776072264
+  },
+  {
+    "feature": "sma_50",
+    "importance": 0.006531815975904465
+  },
+  {
+    "feature": "sma_10",
+    "importance": 0.006489057093858719
+  },
+  {
+    "feature": "ema_12",
+    "importance": 0.005650337785482407
+  },
+  {
+    "feature": "ema_26",
+    "importance": 0.0022427497897297144
+  }
+]

@@ -16,7 +16,7 @@ class TrainingPipeline:
         self.model_name = model_name
         self.config_loader = config_loader or ConfigLoader()
         self.model_cfg = self.config_loader.get_model_config(model_name)
-        self.features_cfg = self.config_loader.load_config("data/features.yaml")
+        self.features_cfg = self.config_loader.load_yaml("data/features.yaml")
         self.output_dir = self.config_loader.resolve_path("models/prediction")
 
     def run(self) -> Dict[str, Any]:

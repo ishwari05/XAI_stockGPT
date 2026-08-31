@@ -1,0 +1,9 @@
+{
+  "total_rows": 4568907,
+  "total_columns": 29,
+  "unique_tickers": 2367,
+  "date_start": "2015-03-16 00:00:00",
+  "date_end": "2026-08-14 00:00:00",
+  "target_column": null,
+  "feature_count": 26
+}

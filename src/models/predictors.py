@@ -124,6 +124,9 @@ class NeuralNetBaselineModel(BasePredictionModel):
     def fit(self, X_train: pd.DataFrame, y_train: pd.Series, 
             X_val: Optional[pd.DataFrame] = None, y_val: Optional[pd.Series] = None) -> "NeuralNetBaselineModel":
         from sklearn.neural_network import MLPClassifier
+        from sklearn.preprocessing import StandardScaler
+        from sklearn.pipeline import make_pipeline
+        
         self.feature_names = list(X_train.columns)
         params = self.config.get("hyperparameters", {}).copy()
         
@@ -131,7 +134,7 @@ class NeuralNetBaselineModel(BasePredictionModel):
         if "hidden_layer_sizes" in params and isinstance(params["hidden_layer_sizes"], list):
             params["hidden_layer_sizes"] = tuple(params["hidden_layer_sizes"])
             
-        self.model = MLPClassifier(**params)
+        self.model = make_pipeline(StandardScaler(), MLPClassifier(**params))
         self.model.fit(X_train, y_train)
         return self
 

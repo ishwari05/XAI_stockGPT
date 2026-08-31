@@ -22,6 +22,7 @@ class ShapExplainer(BaseExplainer):
 
     def __init__(self, model: Any, explainer_type: str = "tree"):
         self.explainer_type = explainer_type
+        self.model = model
         if explainer_type == "tree":
             # For tree ensembles (XGBoost, LightGBM, RF)
             if hasattr(model, "model"):
@@ -29,9 +30,17 @@ class ShapExplainer(BaseExplainer):
             else:
                 raw_model = model
             self.explainer = shap.TreeExplainer(raw_model)
-        else:
-            self.explainer = shap.Explainer(model)
 
     def explain(self, X: pd.DataFrame) -> np.ndarray:
-        shap_values = self.explainer.shap_values(X)
+        if self.explainer_type == "tree":
+            shap_values = self.explainer.shap_values(X)
+        else:
+            model_func = self.model.predict_proba if hasattr(self.model, "predict_proba") else self.model.predict
+            # Use KernelExplainer with a k-means summary of X as the background to speed it up
+            import warnings
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore")
+                explainer = shap.KernelExplainer(model_func, shap.kmeans(X, 10))
+                shap_values = explainer.shap_values(X)
+                
         return np.array(shap_values)

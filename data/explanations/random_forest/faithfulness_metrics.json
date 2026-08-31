@@ -1,0 +1,10 @@
+{
+  "baseline_confidence": 0.5549868440792807,
+  "top_feature_perturbed": "bb_bandwidth",
+  "top_perturbed_confidence": 0.4749026034065743,
+  "top_confidence_drop": 0.08008424067270636,
+  "control_feature_perturbed": "bb_upper",
+  "control_perturbed_confidence": 0.5500939778031801,
+  "control_confidence_drop": 0.004892866276100527,
+  "faithfulness_ratio": 16.36755148283578
+}

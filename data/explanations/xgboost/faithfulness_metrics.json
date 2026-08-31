@@ -1,0 +1,10 @@
+{
+  "baseline_confidence": 0.6024386882781982,
+  "top_feature_perturbed": "return_1d",
+  "top_perturbed_confidence": 0.26871493458747864,
+  "top_confidence_drop": 0.3337237536907196,
+  "control_feature_perturbed": "ema_26",
+  "control_perturbed_confidence": 0.5934619903564453,
+  "control_confidence_drop": 0.00897669792175293,
+  "faithfulness_ratio": 37.17667193434438
+}

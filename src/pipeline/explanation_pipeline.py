@@ -52,7 +52,7 @@ class ExplanationPipeline:
         X = test_df[feature_cols]
 
         # 3. Compute SHAP explanations
-        explainer = ShapExplainer(model_inst, explainer_type=model_cfg.get("explainer_type", "tree"))
+        explainer = ShapExplainer(model_inst, explainer_type=model_cfg.get("model", {}).get("explainer_type", "tree"))
         shap_values = explainer.explain(X)
 
         # Handle multiclass or single-class SHAP dimensions
