@@ -1,0 +1,14 @@
+{
+  "experiment": "threshold_075_class_weights",
+  "timestamp": "2026-08-31T11:07:58.696247+00:00",
+  "changes": [
+    "buy/sell thresholds: \u00b11.0% -> \u00b10.75%",
+    "XGBoost balanced class sample weights enabled",
+    "SHAP tree_shap config fix",
+    "run_pipeline.py wiring fix"
+  ],
+  "baseline_metrics_file": "experiments/prediction/xgboost_baseline_1pct.json",
+  "baseline_test_macro_f1": 0.3849,
+  "new_test_macro_f1": 0.40349199020307225,
+  "delta_macro_f1": 0.01859199020307223
+}

@@ -45,8 +45,8 @@ targets:
     enabled: true
     horizon: 1 # Number of forward trading days
     method: "fixed_return"
-    buy_threshold: 0.01 # +1.0% forward return
-    sell_threshold: -0.01 # -1.0% forward return
+    buy_threshold: 0.0075 # +0.75% forward return (balanced class distribution)
+    sell_threshold: -0.0075 # -0.75% forward return
     class_labels:
       0: "SELL"
       1: "HOLD"

@@ -1,10 +1,10 @@
 {
-  "baseline_confidence": 0.4383395739307118,
-  "top_feature_perturbed": "return_1d",
-  "top_perturbed_confidence": 0.2806703992890556,
-  "top_confidence_drop": 0.1576691746416562,
+  "baseline_confidence": 0.47015394086785756,
+  "top_feature_perturbed": "atr_14",
+  "top_perturbed_confidence": 0.5886475281317803,
+  "top_confidence_drop": -0.11849358726392278,
   "control_feature_perturbed": "volume_sma_20",
-  "control_perturbed_confidence": 0.43927780663173555,
-  "control_confidence_drop": -0.0009382327010237224,
-  "faithfulness_ratio": 15766.91746416562
+  "control_perturbed_confidence": 0.47412252828508,
+  "control_confidence_drop": -0.003968587417222447,
+  "faithfulness_ratio": -11849.358726392278
 }

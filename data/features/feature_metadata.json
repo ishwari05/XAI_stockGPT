@@ -1,152 +1,94 @@
 {
-  "pipeline_stage": "Phase 2 - Feature Engineering & Target Generation",
-  "config_version_hash": "13438a22e45d",
-  "feature_count": 28,
+  "pipeline_stage": "v1_to_v2_migration",
+  "migrated_at": "2026-08-31T10:59:55.152093+00:00",
+  "source_format": "data/final/*.csv",
+  "target_column": "target_cls_h1",
+  "buy_threshold": 0.0075,
+  "sell_threshold": -0.0075,
+  "feature_count": 21,
   "feature_names": [
-    "sma_20",
+    "sma_10",
     "sma_50",
-    "ema_20",
-    "ema_50",
-    "price_vs_sma20",
+    "ema_12",
+    "ema_26",
     "price_vs_sma50",
+    "rsi_14",
     "macd",
     "macd_signal",
     "macd_hist",
-    "rsi_14",
     "stoch_k",
     "stoch_d",
-    "atr_14",
-    "atr_ratio",
     "bb_upper",
-    "bb_middle",
     "bb_lower",
-    "bb_bandwidth",
     "bb_pct_b",
-    "volatility_10d",
-    "volatility_20d",
+    "bb_bandwidth",
+    "atr_14",
+    "obv",
     "volume_sma_20",
     "volume_ratio",
-    "obv",
     "return_1d",
-    "return_5d",
-    "return_10d",
-    "return_20d"
+    "return_5d"
   ],
-  "feature_categories": {
-    "trend": [
-      "sma_20",
-      "sma_50",
-      "ema_20",
-      "ema_50",
-      "price_vs_sma20",
-      "price_vs_sma50",
-      "macd",
-      "macd_signal",
-      "macd_hist",
-      "volume_sma_20"
-    ],
-    "momentum": [
-      "rsi_14",
-      "stoch_k",
-      "stoch_d"
-    ],
-    "volatility": [
-      "atr_14",
-      "atr_ratio",
-      "bb_upper",
-      "bb_middle",
-      "bb_lower",
-      "bb_bandwidth",
-      "bb_pct_b",
-      "volatility_10d",
-      "volatility_20d"
-    ],
-    "volume": [
-      "volume_sma_20",
-      "volume_ratio",
-      "obv"
-    ],
-    "returns": [
-      "return_1d",
-      "return_5d",
-      "return_10d",
-      "return_20d"
-    ]
-  },
-  "target_definitions": {
-    "classification": {
-      "enabled": true,
-      "target_column": "target_classification",
-      "target_label_column": "target_label",
-      "horizon": 1,
-      "buy_threshold": 0.01,
-      "sell_threshold": -0.01,
-      "classes": {
-        "0": "SELL",
-        "1": "HOLD",
-        "2": "BUY"
-      }
-    },
-    "regression": {
-      "enabled": true,
-      "horizons": [
-        1,
-        5,
-        10
-      ]
-    }
-  },
   "splits": {
     "train": {
-      "split": "train",
-      "initial_rows": 1825,
-      "final_rows": 1570,
-      "warmup_rows_dropped": 245,
-      "feature_count": 28,
-      "classification_distribution": {
-        "HOLD": 1007,
-        "BUY": 311,
-        "SELL": 257
-      },
-      "leakage_check": "PASSED",
-      "start_date": "2023-03-14",
-      "end_date": "2024-06-26",
-      "saved_path": "/Users/ishwaripandit05/Documents/xai_stockgpt/xai-stockgpt-v2/data/features/train_features.parquet"
+      "source_csv": "/Users/ishwaripandit05/Documents/xai-stockgpt-v2/data/final/train.csv",
+      "output_parquet": "/Users/ishwaripandit05/Documents/xai-stockgpt-v2/data/features/train.parquet",
+      "rows": 2857514,
+      "columns": 30,
+      "feature_count": 21,
+      "tickers": 1835,
+      "date_start": "2015-03-16 00:00:00",
+      "date_end": "2023-03-13 00:00:00",
+      "dropped_leaky_columns": [
+        "target",
+        "next_day_return"
+      ],
+      "raw_rows": 2857514,
+      "target_distribution": {
+        "0": 1044245,
+        "2": 928126,
+        "1": 885143
+      }
     },
     "validation": {
-      "split": "validation",
-      "initial_rows": 630,
-      "final_rows": 375,
-      "warmup_rows_dropped": 245,
-      "feature_count": 28,
-      "classification_distribution": {
-        "HOLD": 226,
-        "SELL": 83,
-        "BUY": 71
-      },
-      "leakage_check": "PASSED",
-      "start_date": "2024-09-10",
-      "end_date": "2024-12-27",
-      "saved_path": "/Users/ishwaripandit05/Documents/xai_stockgpt/xai-stockgpt-v2/data/features/validation_features.parquet"
+      "source_csv": "/Users/ishwaripandit05/Documents/xai-stockgpt-v2/data/final/validation.csv",
+      "output_parquet": "/Users/ishwaripandit05/Documents/xai-stockgpt-v2/data/features/validation.parquet",
+      "rows": 802922,
+      "columns": 30,
+      "feature_count": 21,
+      "tickers": 2018,
+      "date_start": "2023-03-14 00:00:00",
+      "date_end": "2024-12-03 00:00:00",
+      "dropped_leaky_columns": [
+        "target",
+        "next_day_return"
+      ],
+      "raw_rows": 802922,
+      "target_distribution": {
+        "0": 278532,
+        "2": 270389,
+        "1": 254001
+      }
     },
     "test": {
-      "split": "test",
-      "initial_rows": 510,
-      "final_rows": 255,
-      "warmup_rows_dropped": 245,
-      "feature_count": 28,
-      "classification_distribution": {
-        "HOLD": 147,
-        "BUY": 61,
-        "SELL": 52
-      },
-      "leakage_check": "PASSED",
-      "start_date": "2025-03-11",
-      "end_date": "2025-05-28",
-      "saved_path": "/Users/ishwaripandit05/Documents/xai_stockgpt/xai-stockgpt-v2/data/features/test_features.parquet"
+      "source_csv": "/Users/ishwaripandit05/Documents/xai-stockgpt-v2/data/final/test.csv",
+      "output_parquet": "/Users/ishwaripandit05/Documents/xai-stockgpt-v2/data/features/test.parquet",
+      "rows": 908471,
+      "columns": 30,
+      "feature_count": 21,
+      "tickers": 2367,
+      "date_start": "2024-12-04 00:00:00",
+      "date_end": "2026-08-14 00:00:00",
+      "dropped_leaky_columns": [
+        "target",
+        "next_day_return"
+      ],
+      "raw_rows": 908471,
+      "target_distribution": {
+        "0": 341579,
+        "2": 283823,
+        "1": 283069
+      }
     }
-  },
-  "validation_report_file": "/Users/ishwaripandit05/Documents/xai_stockgpt/xai-stockgpt-v2/reports/features/feature_validation.csv",
-  "timestamp": "2026-08-26T07:29:50.208065",
-  "duration_seconds": 0.29
+  }
 }

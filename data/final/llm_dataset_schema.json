@@ -1,0 +1,254 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "XAI-StockGPT LLM Fine-Tuning Dataset Schema",
+    "description": "Defines the structured inputs and target outputs for instruction-tuning the explanation layer.",
+    "type": "object",
+    "properties": {
+        "example_id": {
+            "type": "string",
+            "description": "Unique identifier mapping to Ticker_Date"
+        },
+        "task_type": {
+            "type": "string",
+            "enum": [
+                "SIGNAL_EXPLANATION",
+                "FEATURE_CONTRIBUTION",
+                "CONFIDENCE_EXPLANATION",
+                "CONFLICTING_INDICATORS",
+                "ERROR_EXPLANATION",
+                "COMPLETE_ANALYST"
+            ]
+        },
+        "temporal_split": {
+            "type": "string",
+            "enum": [
+                "TRAIN",
+                "VALIDATION",
+                "TEST"
+            ]
+        },
+        "input_context": {
+            "type": "object",
+            "properties": {
+                "metadata": {
+                    "type": "object",
+                    "properties": {
+                        "ticker": {
+                            "type": "string"
+                        },
+                        "date": {
+                            "type": "string",
+                            "format": "date"
+                        }
+                    },
+                    "required": [
+                        "ticker",
+                        "date"
+                    ]
+                },
+                "quantitative_predictions": {
+                    "type": "object",
+                    "properties": {
+                        "xgb_prediction": {
+                            "type": "string",
+                            "enum": [
+                                "BUY",
+                                "HOLD",
+                                "SELL"
+                            ]
+                        },
+                        "p_sell": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1
+                        },
+                        "p_hold": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1
+                        },
+                        "p_buy": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1
+                        },
+                        "confidence": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1
+                        }
+                    },
+                    "required": [
+                        "xgb_prediction",
+                        "p_sell",
+                        "p_hold",
+                        "p_buy",
+                        "confidence"
+                    ]
+                },
+                "technical_indicators": {
+                    "type": "object",
+                    "properties": {
+                        "Open": {
+                            "type": "number"
+                        },
+                        "High": {
+                            "type": "number"
+                        },
+                        "Low": {
+                            "type": "number"
+                        },
+                        "Close": {
+                            "type": "number"
+                        },
+                        "Volume": {
+                            "type": "number"
+                        },
+                        "sma_10": {
+                            "type": "number"
+                        },
+                        "sma_50": {
+                            "type": "number"
+                        },
+                        "ema_12": {
+                            "type": "number"
+                        },
+                        "ema_26": {
+                            "type": "number"
+                        },
+                        "price_vs_sma50": {
+                            "type": "number"
+                        },
+                        "rsi_14": {
+                            "type": "number"
+                        },
+                        "macd": {
+                            "type": "number"
+                        },
+                        "macd_signal": {
+                            "type": "number"
+                        },
+                        "macd_hist": {
+                            "type": "number"
+                        },
+                        "stoch_k": {
+                            "type": "number"
+                        },
+                        "stoch_d": {
+                            "type": "number"
+                        },
+                        "bb_upper": {
+                            "type": "number"
+                        },
+                        "bb_lower": {
+                            "type": "number"
+                        },
+                        "bb_pct_b": {
+                            "type": "number"
+                        },
+                        "bb_bandwidth": {
+                            "type": "number"
+                        },
+                        "atr_14": {
+                            "type": "number"
+                        },
+                        "obv": {
+                            "type": "number"
+                        },
+                        "volume_sma_20": {
+                            "type": "number"
+                        },
+                        "volume_ratio": {
+                            "type": "number"
+                        },
+                        "return_1d": {
+                            "type": "number"
+                        },
+                        "return_5d": {
+                            "type": "number"
+                        }
+                    }
+                },
+                "shap_explanations": {
+                    "type": "object",
+                    "properties": {
+                        "global_importance_rank": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "top_positive_features": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "feature": {
+                                        "type": "string"
+                                    },
+                                    "shap_value": {
+                                        "type": "number"
+                                    },
+                                    "raw_value": {
+                                        "type": "number"
+                                    }
+                                }
+                            }
+                        },
+                        "top_negative_features": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "feature": {
+                                        "type": "string"
+                                    },
+                                    "shap_value": {
+                                        "type": "number"
+                                    },
+                                    "raw_value": {
+                                        "type": "number"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "ground_truth_context": {
+                    "type": "object",
+                    "description": "Strictly post-hoc error analysis contextual data. NEVER available at prediction time.",
+                    "properties": {
+                        "actual_outcome": {
+                            "type": "string",
+                            "enum": [
+                                "BUY",
+                                "HOLD",
+                                "SELL"
+                            ]
+                        },
+                        "next_day_return": {
+                            "type": "number"
+                        }
+                    }
+                }
+            },
+            "required": [
+                "metadata",
+                "quantitative_predictions",
+                "technical_indicators",
+                "shap_explanations"
+            ]
+        },
+        "output_explanation": {
+            "type": "string",
+            "description": "Human-readable grounded explanation formatted in accordance with standardized task guidelines."
+        }
+    },
+    "required": [
+        "example_id",
+        "task_type",
+        "temporal_split",
+        "input_context",
+        "output_explanation"
+    ]
+}

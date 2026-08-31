@@ -20,10 +20,20 @@ class ShapExplainer(BaseExplainer):
     or kernel-based model without model-specific scripts.
     """
 
+    @staticmethod
+    def normalize_explainer_type(explainer_type: str) -> str:
+        mapping = {
+            "tree": "tree",
+            "tree_shap": "tree",
+            "kernel": "kernel",
+            "kernel_shap": "kernel",
+        }
+        return mapping.get(explainer_type, explainer_type)
+
     def __init__(self, model: Any, explainer_type: str = "tree"):
-        self.explainer_type = explainer_type
+        self.explainer_type = self.normalize_explainer_type(explainer_type)
         self.model = model
-        if explainer_type == "tree":
+        if self.explainer_type == "tree":
             # For tree ensembles (XGBoost, LightGBM, RF)
             if hasattr(model, "model"):
                 raw_model = model.model

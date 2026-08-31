@@ -3,5 +3,5 @@
 ============================================================
 
 status: COMPLETED
-evaluated_models: []
-output_tables_directory: /Users/ishwaripandit05/Documents/xai_stockgpt/xai-stockgpt-v2/reports_tables
+evaluated_models: ['neural_baseline', 'xgboost', 'random_forest', 'lightgbm']
+output_tables_directory: /Users/ishwaripandit05/Documents/xai-stockgpt-v2/reports_tables

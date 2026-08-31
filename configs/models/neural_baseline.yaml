@@ -15,3 +15,4 @@ hyperparameters:
 training:
   early_stopping_patience: 10
   device: "auto" # auto detects CUDA -> other accelerator -> CPU
+  use_class_weights: false  # MLP pipeline does not support sample_weight routing

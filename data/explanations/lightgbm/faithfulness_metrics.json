@@ -1,10 +1,10 @@
 {
-  "baseline_confidence": 0.6604248299447129,
-  "top_feature_perturbed": "return_1d",
-  "top_perturbed_confidence": 0.3321774666585861,
-  "top_confidence_drop": 0.32824736328612675,
-  "control_feature_perturbed": "sma_10",
-  "control_perturbed_confidence": 0.6637077505382708,
-  "control_confidence_drop": -0.0032829205935579475,
-  "faithfulness_ratio": 32824.73632861267
+  "baseline_confidence": 0.6745498732844915,
+  "top_feature_perturbed": "bb_bandwidth",
+  "top_perturbed_confidence": 0.5594419702459816,
+  "top_confidence_drop": 0.11510790303850982,
+  "control_feature_perturbed": "macd",
+  "control_perturbed_confidence": 0.6721842520631851,
+  "control_confidence_drop": 0.0023656212213063466,
+  "faithfulness_ratio": 48.65863647221797
 }

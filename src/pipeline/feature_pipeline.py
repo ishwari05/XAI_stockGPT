@@ -196,7 +196,10 @@ class FeaturePipeline:
             # Save processed feature split
             out_split_path = self.output_features_dir / f"{split_name}_features.parquet"
             df_feat.to_parquet(out_split_path, index=False)
-            all_splits_summary[split_name]["saved_path"] = str(out_split_path)
+            # Canonical name expected by TrainingPipeline
+            canonical_path = self.output_features_dir / f"{split_name}.parquet"
+            df_feat.to_parquet(canonical_path, index=False)
+            all_splits_summary[split_name]["saved_path"] = str(canonical_path)
 
         # Save Feature Validation Report CSV
         val_df = pd.DataFrame(all_val_records)

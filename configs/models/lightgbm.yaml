@@ -19,3 +19,4 @@ hyperparameters:
 training:
   early_stopping_rounds: 30
   verbose: false
+  use_class_weights: true

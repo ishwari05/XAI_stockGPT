@@ -14,3 +14,4 @@ hyperparameters:
 
 training:
   verbose: false
+  use_class_weights: true

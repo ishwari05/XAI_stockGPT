@@ -23,8 +23,12 @@ class ExplanationPipeline:
         self.output_dir.mkdir(parents=True, exist_ok=True)
         self.reports_dir = self.config_loader.resolve_path("reports_tables") / "xai"
         self.reports_dir.mkdir(parents=True, exist_ok=True)
+        exp_cfg = self.config_loader.get_experiment_config()
+        self.default_sample_size = exp_cfg.get("pipeline", {}).get("xai", {}).get("sample_size", 5000)
 
-    def run(self, sample_size: Optional[int] = 100) -> Dict[str, Any]:
+    def run(self, sample_size: Optional[int] = None) -> Dict[str, Any]:
+        if sample_size is None:
+            sample_size = self.default_sample_size
         # 1. Load trained model
         models_dir = self.config_loader.resolve_path("models/prediction") / self.model_name
         model_cls = ModelRegistry.get(self.model_name)
@@ -52,7 +56,10 @@ class ExplanationPipeline:
         X = test_df[feature_cols]
 
         # 3. Compute SHAP explanations
-        explainer = ShapExplainer(model_inst, explainer_type=model_cfg.get("model", {}).get("explainer_type", "tree"))
+        explainer = ShapExplainer(
+            model_inst,
+            explainer_type=model_cfg.get("model", {}).get("explainer_type", "tree"),
+        )
         shap_values = explainer.explain(X)
 
         # Handle multiclass or single-class SHAP dimensions
