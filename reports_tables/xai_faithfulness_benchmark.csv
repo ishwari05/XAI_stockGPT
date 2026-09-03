@@ -1,0 +1,2 @@
+baseline_confidence,top_feature_perturbed,top_perturbed_confidence,top_confidence_drop,control_feature_perturbed,control_perturbed_confidence,control_confidence_drop,faithfulness_ratio,model
+0.5815364718437195,atr_14,0.4447329640388489,0.1368035078048706,macd_hist,0.5996226668357849,-0.01808619499206543,13680.350780487059,xgboost

@@ -71,7 +71,10 @@ class FinanceLLMTrainer(BaseLLMTrainer):
                 torch_dtype = torch.float16
 
             # 3. Load Tokenizer & Model
-            tokenizer = AutoTokenizer.from_pretrained(model_id, trust_remote_code=True)
+            try:
+                tokenizer = AutoTokenizer.from_pretrained(model_id, trust_remote_code=True)
+            except Exception:
+                tokenizer = AutoTokenizer.from_pretrained(model_id, trust_remote_code=True, use_fast=False)
             if tokenizer.pad_token is None:
                 tokenizer.pad_token = tokenizer.eos_token
 
@@ -119,19 +122,35 @@ class FinanceLLMTrainer(BaseLLMTrainer):
             # 6. Training Configuration Arguments
             t_cfg = self.config.get("training", {})
             
-            # Use appropriate precision parameters based on device info
+            # Use appropriate precision parameters based on device info.
+            # Enforce mutual exclusivity: TrainingArguments raises if both are True.
+            # Priority: bf16 > fp16 (bf16 is preferred on modern Ampere+ CUDA GPUs).
             precision_support = self.device_info.get("precision_support", {})
             fp16 = precision_support.get("fp16", False) if t_cfg.get("fp16") == "auto" else bool(t_cfg.get("fp16", False))
             bf16 = precision_support.get("bf16", False) if t_cfg.get("bf16") == "auto" else bool(t_cfg.get("bf16", False))
+            if bf16 and fp16:
+                fp16 = False  # bf16 takes priority; never enable both simultaneously
+
+            # Compute warmup_steps from warmup_ratio since SFTConfig in trl >= 0.12
+            # does not accept warmup_ratio as a direct kwarg (it inherits from
+            # TrainingArguments but only SFT-specific args are exposed directly).
+            num_epochs = t_cfg.get("num_train_epochs", 3)
+            batch_size = t_cfg.get("per_device_train_batch_size", 4)
+            grad_accum = t_cfg.get("gradient_accumulation_steps", 4)
+            num_train_samples = len(train_dataset) if train_dataset else 1000
+            steps_per_epoch = max(1, num_train_samples // (batch_size * grad_accum))
+            total_steps = steps_per_epoch * num_epochs
+            warmup_ratio = t_cfg.get("warmup_ratio", 0.03)
+            warmup_steps = max(1, int(total_steps * warmup_ratio))
 
             training_args = SFTConfig(
                 output_dir=str(output_dir),
                 learning_rate=t_cfg.get("learning_rate", 2e-4),
-                num_train_epochs=t_cfg.get("num_train_epochs", 3),
-                per_device_train_batch_size=t_cfg.get("per_device_train_batch_size", 4),
+                num_train_epochs=num_epochs,
+                per_device_train_batch_size=batch_size,
                 per_device_eval_batch_size=t_cfg.get("per_device_eval_batch_size", 4),
-                gradient_accumulation_steps=t_cfg.get("gradient_accumulation_steps", 4),
-                warmup_ratio=t_cfg.get("warmup_ratio", 0.03),
+                gradient_accumulation_steps=grad_accum,
+                warmup_steps=warmup_steps,
                 weight_decay=t_cfg.get("weight_decay", 0.01),
                 logging_steps=t_cfg.get("logging_steps", 50),
                 eval_steps=t_cfg.get("eval_steps", 250),
@@ -143,6 +162,7 @@ class FinanceLLMTrainer(BaseLLMTrainer):
                 save_total_limit=1,
                 dataset_text_field="text",
                 max_length=t_cfg.get("max_seq_length", 1024),
+                max_grad_norm=t_cfg.get("max_grad_norm", 1.0),
             )
 
             # 7. SFTTrainer Run

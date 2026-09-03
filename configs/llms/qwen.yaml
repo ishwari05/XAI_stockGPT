@@ -21,17 +21,18 @@ peft:
     - "down_proj"
 
 training:
-  learning_rate: 0.0002
+  learning_rate: 0.0001
   num_train_epochs: 3
-  per_device_train_batch_size: 4
-  per_device_eval_batch_size: 4
-  gradient_accumulation_steps: 4
+  per_device_train_batch_size: 32
+  per_device_eval_batch_size: 32
+  gradient_accumulation_steps: 2
   max_seq_length: 1024
   warmup_ratio: 0.03
   weight_decay: 0.01
+  max_grad_norm: 1.0
   logging_steps: 50
-  eval_steps: 250
-  save_steps: 250
+  eval_steps: 1000
+  save_steps: 1000
   fp16: "auto" # true if cuda available and supported, false otherwise
   bf16: "auto" # true if supported on cuda accelerator
   device: "auto" # automatically resolved via hardware detector
