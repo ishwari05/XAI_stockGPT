@@ -1,0 +1,113 @@
+================================================================================
+         XAI-STOCKGPT v2: PREDICTION MODELS COMPREHENSIVE REPORT
+                 LOCKED TEST SET EVALUATION (N = 908,471)
+================================================================================
+
+--------------------------------------------------------------------------------
+ MODEL: XGBOOST (CLASSIFIER)
+--------------------------------------------------------------------------------
+  Accuracy:          0.410431 (41.04%)
+  Balanced Accuracy: 0.414121
+  Macro F1:          0.403492
+  Matthews Corr (MCC):0.120861
+
+  Confusion Matrix (Row = True, Col = Predicted):
+  -------------------------------------------------------
+  True Class   | Pred SELL    | Pred HOLD    | Pred BUY     | Total
+  -------------------------------------------------------
+  SELL (0)     | 122,381      | 140,348      | 78,850       | 341,579
+  HOLD (1)     | 68,711       | 164,814      | 49,544       | 283,069
+  BUY (2)      | 88,105       | 110,048      | 85,670       | 283,823
+  -------------------------------------------------------
+
+  Normalized Confusion Matrix (Recall / Class Accuracy):
+    SELL (0)  : SELL= 35.83%, HOLD= 41.09%, BUY= 23.08%
+    HOLD (1)  : SELL= 24.27%, HOLD= 58.22%, BUY= 17.50%
+    BUY (2)   : SELL= 31.04%, HOLD= 38.77%, BUY= 30.18%
+
+  Per-Class Classification Metrics:
+    Class SELL -> Precision: 0.4383, Recall: 0.3583, F1-Score: 0.3943, Support: 341,579
+    Class HOLD -> Precision: 0.3969, Recall: 0.5822, F1-Score: 0.4721, Support: 283,069
+    Class BUY  -> Precision: 0.4002, Recall: 0.3018, F1-Score: 0.3441, Support: 283,823
+
+--------------------------------------------------------------------------------
+ MODEL: LIGHTGBM (CLASSIFIER)
+--------------------------------------------------------------------------------
+  Accuracy:          0.405663 (40.57%)
+  Balanced Accuracy: 0.410546
+  Macro F1:          0.395891
+  Matthews Corr (MCC):0.116605
+
+  Confusion Matrix (Row = True, Col = Predicted):
+  -------------------------------------------------------
+  True Class   | Pred SELL    | Pred HOLD    | Pred BUY     | Total
+  -------------------------------------------------------
+  SELL (0)     | 114,900      | 152,245      | 74,434       | 341,579
+  HOLD (1)     | 63,931       | 173,470      | 45,668       | 283,069
+  BUY (2)      | 84,026       | 119,634      | 80,163       | 283,823
+  -------------------------------------------------------
+
+  Normalized Confusion Matrix (Recall / Class Accuracy):
+    SELL (0)  : SELL= 33.64%, HOLD= 44.57%, BUY= 21.79%
+    HOLD (1)  : SELL= 22.58%, HOLD= 61.28%, BUY= 16.13%
+    BUY (2)   : SELL= 29.61%, HOLD= 42.15%, BUY= 28.24%
+
+  Per-Class Classification Metrics:
+    Class SELL -> Precision: 0.4371, Recall: 0.3364, F1-Score: 0.3802, Support: 341,579
+    Class HOLD -> Precision: 0.3895, Recall: 0.6128, F1-Score: 0.4763, Support: 283,069
+    Class BUY  -> Precision: 0.4003, Recall: 0.2824, F1-Score: 0.3312, Support: 283,823
+
+--------------------------------------------------------------------------------
+ MODEL: RANDOM FOREST (ENSEMBLE)
+--------------------------------------------------------------------------------
+  Accuracy:          0.401270 (40.13%)
+  Balanced Accuracy: 0.404401
+  Macro F1:          0.383898
+  Matthews Corr (MCC):0.110060
+
+  Confusion Matrix (Row = True, Col = Predicted):
+  -------------------------------------------------------
+  True Class   | Pred SELL    | Pred HOLD    | Pred BUY     | Total
+  -------------------------------------------------------
+  SELL (0)     | 122,354      | 165,549      | 53,676       | 341,579
+  HOLD (1)     | 71,355       | 180,773      | 30,941       | 283,069
+  BUY (2)      | 90,308       | 132,100      | 61,415       | 283,823
+  -------------------------------------------------------
+
+  Normalized Confusion Matrix (Recall / Class Accuracy):
+    SELL (0)  : SELL= 35.82%, HOLD= 48.47%, BUY= 15.71%
+    HOLD (1)  : SELL= 25.21%, HOLD= 63.86%, BUY= 10.93%
+    BUY (2)   : SELL= 31.82%, HOLD= 46.54%, BUY= 21.64%
+
+  Per-Class Classification Metrics:
+    Class SELL -> Precision: 0.4308, Recall: 0.3582, F1-Score: 0.3912, Support: 341,579
+    Class HOLD -> Precision: 0.3779, Recall: 0.6386, F1-Score: 0.4748, Support: 283,069
+    Class BUY  -> Precision: 0.4206, Recall: 0.2164, F1-Score: 0.2857, Support: 283,823
+
+--------------------------------------------------------------------------------
+ MODEL: NEURAL BASELINE (MLP / STANDARDSCALER)
+--------------------------------------------------------------------------------
+  Accuracy:          0.413924 (41.39%)
+  Balanced Accuracy: 0.408533
+  Macro F1:          0.402986
+  Matthews Corr (MCC):0.113269
+
+  Confusion Matrix (Row = True, Col = Predicted):
+  -------------------------------------------------------
+  True Class   | Pred SELL    | Pred HOLD    | Pred BUY     | Total
+  -------------------------------------------------------
+  SELL (0)     | 168,812      | 106,285      | 66,482       | 341,579
+  HOLD (1)     | 105,701      | 134,679      | 42,689       | 283,069
+  BUY (2)      | 128,209      | 83,067       | 72,547       | 283,823
+  -------------------------------------------------------
+
+  Normalized Confusion Matrix (Recall / Class Accuracy):
+    SELL (0)  : SELL= 49.42%, HOLD= 31.12%, BUY= 19.46%
+    HOLD (1)  : SELL= 37.34%, HOLD= 47.58%, BUY= 15.08%
+    BUY (2)   : SELL= 45.17%, HOLD= 29.27%, BUY= 25.56%
+
+  Per-Class Classification Metrics:
+    Class SELL -> Precision: 0.4192, Recall: 0.4942, F1-Score: 0.4536, Support: 341,579
+    Class HOLD -> Precision: 0.4156, Recall: 0.4758, F1-Score: 0.4437, Support: 283,069
+    Class BUY  -> Precision: 0.3992, Recall: 0.2556, F1-Score: 0.3117, Support: 283,823
+
